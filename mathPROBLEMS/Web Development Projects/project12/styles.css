@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: white;
+    padding:0;
+    margin:0;
+}
+/*-----------------------
+CSS GRID
+------------------------*/
+.main-wrapper{
+    max-width: 1200px;
+    margin:auto;
+}
+
+.wrapper{
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 10px 430px 120px 550px;
+    grid-template-rows: 1fr;
+    grid-gap: 30px;
+    color: #ffffff;
+    grid-template-areas:
+    ". bl1 . bl2"
+}
+.block1{
+    grid-area:bl1;
+    min-height: 700px;
+    background:linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.1)) /*simple gradiant that has strating color and ending color*/
+    border-box, url(imgs/img3.jpg)
+    no-repeat center center;
+    margin-bottom:60px;
+    cursor: pointer;
+    transition: 1s ease;
+    background-color: black;
+}
+
+.block2:hover{ 
+    background:white;
+    opacity: 1;
+}
+.block1:hover{ 
+    background:white;
+    opacity: 1;
+}
+.block2{
+    grid-area:bl2;
+    background:linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.1)) /*simple gradiant that has strating color and ending color*/
+    border-box, url(imgs/hello.jpeg)
+    no-repeat center center;
+    margin-bottom:5px;
+    cursor: pointer;
+    transition: 1s ease;
+    background-color: black;
+}
+
+.wrapper2{
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 50px 360px 70px 620px;
+    grid-gap: 30px;
+    color: #ffffff;
+    grid-template-areas:
+    ". bl3 . bl4"
+}
+
+.block3{
+    margin-top:200px;
+    margin-bottom: 20px;
+    grid-area:bl3;
+    min-height: 600px;
+    background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.1)) /*simple gradiant that has strating color and ending color*/
+    border-box, url(imgs/hello1.jpeg)
+    no-repeat center center;
+    cursor: pointer;
+    transition: 1s ease;
+    background-color: black;
+    
+
+
+}
+
+.block4{
+    margin-top: 200px;
+    grid-area:bl4;
+    background: grey;
+    margin-bottom: 5px;
+    background: linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,0.1)) /*simple gradiant that has strating color and ending color*/
+    border-box, url(imgs/hello2.jpeg)
+    no-repeat center center;
+    cursor: pointer;
+    transition: 1s ease;
+    background-color: black;
+}
+
+.block3:hover{ 
+    background:white;
+    opacity: 1;
+}
+.block4:hover{ 
+    background:white;
+    opacity: 1;
+}
+.block1{
+    box-shadow: 0 0 12px rgba(144,238,144,0.55);
+}
+.block2{
+    box-shadow: 0 0 12px rgba(255,192,203,0.65);
+}
+.block3{
+    box-shadow: 0 0 12px rgba(255,127,80,0.65);
+}
+.block4{
+    box-shadow: 0 0 12px rgba(135,206,250,0.65);
+}
+/*quote*/
+.subscribe{
+    background-color: #f5c900;
+    padding: 20px; 
+    text-align: center;
+    letter-spacing: 1.5px;
+    font-size: 30px;
+    margin-top: 200px;
+    color: white;
+    border-top: 1px solid #fbd72b ;
+    border-radius:1px;
+    border-bottom: 1px solid #fbd72b;
+    display:grid;
+    grid-template-columns: auto 30%;
+}
+
+.sub-us a{
+    cursor: pointer;
+    margin-top: 40px;
+    background: #fff;
+    color:#f5c900;
+    text-transform: uppercase;
+    display: inline-block;
+    border-radius: 30px;
+    text-decoration: none;
+    padding: 10px 30px;
+    font-weight: 600;
+    font-size: 18px;
+    border: 1px solid #fff;
+}
+.sub-us a:hover{
+    background: #f5c900;
+    color: #fff;
+}
+
+
+/*-----------------------------
+a element*
+---------------------------*/
+a{
+    text-decoration: none;
+    font-size: 40px;
+    color:black;
+}
+.thing{
+    letter-spacing: 2px;
+}
+
+.a{
+    display: block;
+    margin:100px 20px 30px 110px;
+
+}
+.btnf{
+    display:block;
+    font-size: 20px;
+    text-transform: uppercase;
+    z-index: 1;
+    border-bottom: 1px solid black;
+    margin-top: 200px;
+    border-radius: 3px;
+    background:none;
+    padding-left: 100px;
+    font-weight: 600;
+
+}
+.block2 .btnf{
+    margin-top:240px;
+    padding-left: 170px;
+}
+
+.block2 .a{
+    margin-left:170px;
+    margin-top:140px;
+}
+
+.block3 .btnf{
+    margin-top:120px;
+    padding-left: 70px;
+}
+.block3 .a{
+    margin-left:145px;
+    margin-top:125px;
+}
+
+.block4 .btnf{
+    margin-top:160px;
+    padding-left: 190px;
+}
+.block4 .a{
+    margin-left:250px;
+    margin-top:140px;
+}
+
+
+
+
+/*LANDING PAGE*/
+.center{
+    max-width: 1300px;
+    margin: 0 auto;
+    text-align: center;
+    height: 100vh;
+}
+.par{
+    font-size:20px;
+    letter-spacing: 0.5px;
+    transition: 1s;
+    color: #f5c900;
+}
+
+.head{
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    letter-spacing: 0.4px;
+    line-height: 250%;
+    margin-top: 200px;
+    color: black;
+    transition: 1s;
+}
+.head:hover{
+    color: #efefef;
+}
+.par:hover{
+    color: #efefef;
+}
+/*main-wrapperV2*/
+.bck{
+    background-color: 	rgb(46, 49, 49);
+    padding-bottom: 130px;
+}
+.main-wrapperv2{
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: #eee;
+}
+
+.header{
+    padding-top:50px;
+    padding-bottom: 10px;
+    font-size: 75px;
+    letter-spacing: 1.3px;
+
+}
+.border{
+    width:60px;
+    height: 3px;
+    background: #eee;
+    margin: 40px auto;
+}
+.text{
+    font-weight: lighter;
+    font-size: 20px;
+    padding-bottom: 30px;
+}
+
+
+.wrapperv2{
+    display:grid;
+    grid-template-columns: 30% 20% auto;
+    grid-gap: 10px;
+    text-align: left;
+}
+
+.section-text h4{
+    font-size:25px;
+
+}
+.section-text p:nth-child(2){
+    line-height:30px;
+}
+.section-text2 h4{
+    font-size:25px;
+}
+textarea{
+    width: 580px;
+    min-height: 110px;
+    margin-top: 40px;
+}
+
+#submit{
+    margin-top:10px;
+    margin-left: 220px;
+    width: 180px;
+    min-height: 30px;
+    text-decoration: none;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    color: #eee;
+    background-color: #f5c900;
+    cursor: pointer;
+}
+#submit:hover{
+    color: #f5c900;
+    background-color: #eee;
+
+}
+
+#comments{
+    padding:20px;
+    font-size: 18px;
+}
+
+/*copyright*/
+footer{
+    padding:5px;
+    background-color: #f5c900;
+    text-align: center;
+}
+.copy{
+    font-size: 18px;
+    text-transform: uppercase;
+    word-spacing: 1.4px;
+    border-bottom: 1px solid #eee;
+}
+
+/*button*/
+.btn{
+    background:none;
+    border: 2px solid #000;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    min-width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+}
+.btn:hover{
+    color:white;
+}
+
+.btn::before{
+    content:"";
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background: #000;
+    z-index: -1;
+    transition: transform 0.5s;
+    transform-origin: 0 0;
+    transition-timing-function: cubic-bezier(0.5,1.6,0.5,0.6);
+}
+
+.btn1::before{
+    transform: scaleX(0);
+}
+
+.btn1:hover::before{
+    transform: scaleX(1);
+}

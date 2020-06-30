@@ -1,0 +1,45 @@
+.heading-2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #F59A83;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  transform: skewY(-3deg);
+}
+
+.copyright {
+  color: #968B87;
+  font-size: 1.2rem;
+  margin-top: auto;
+}
+
+
+.link:link,
+.link:visited {
+  color: #968B87;
+}
+
+.loader {
+  margin: 5rem auto;
+  text-align: center;
+
+  & svg {
+    height: 5.5rem;
+    width: 5.5rem;
+    fill: #F59A83;
+    transform-origin: 44% 50%;
+    animation: rotate 1.5s infinite linear;
+  }
+
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

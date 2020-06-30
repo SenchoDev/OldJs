@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>MathCode.net</title>  
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+    </head>
+    <body>
+        <br/>
+        <div class="container">
+            <h2>Calculating Factorials</h2>
+            | <a href="http://mathcode.net">MathCode</a> | <a href="http://pluralsight.com">Pluralsight</a> | <a href="http://mathcode.net/template.txt">Template</a> | 
+            <hr>
+            <!-- html code here -->
+            <h3>Title</h3>
+            <input type ="text" id="input1" size="3" max="2" value="1">
+            <input type="submit" id="submitButton" value="Calculate Factorial"/>
+            <br/><br/>
+            <div id="details" ></div>
+        </div>
+
+        <script type=text/javascript>
+           "use strict";
+           var f=1;
+           var x =5;
+            $(document).ready(function () {
+                // function code goes here
+                $('#submitButton').click(function () {
+                    // JavaScript code here
+                    f =1;
+                    x  = parseInt($("#input1").val());
+                    if(x <= 0){
+                        alert('x must be greater than zero');
+                        f = N/A
+                    }
+                    
+                    while(x>1){
+                        f = f * x;
+                        x = x-1;
+                    }
+                    console.log(f);
+                    $('#details').html("<b>Factorial numbeer is " + f.toString() + ".</b>");                   
+                });
+            });
+        </script>
+
+    </body>
+</html>

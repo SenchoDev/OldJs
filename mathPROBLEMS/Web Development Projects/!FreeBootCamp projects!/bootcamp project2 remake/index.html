@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="title">
+        <h1>
+            Ovo je Survey
+        </h1>
+
+    </div>
+    <div id="form-outer">
+        <p>Sta trebamo raditi da zastitimo Ljudska prava?</p>
+
+
+        <form id="survey-form" class="" action="index.html" method="GET">
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="name" id="name-label">Kako se zovete:</label>
+                </div>
+                <div class="rightTab">
+                    <input autofocus type="text" id="name" placeholder="Upisite svoje ime?" required class="input-field">
+                </div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="email" id="email-label">Email:</label>
+                </div>
+                <div class="rightTab">
+                    <input type="email" id="email" placeholder="Upisite svoj Email?" required class="input-field">
+                </div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="password" id="password-label">Sifra:</label>
+                </div>
+                <div class="rightTab">
+                    <input type="password" id="password" placeholder="Unesite svoju sifru?" required class="input-field">
+                </div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="age" id="age-label">Godine:</label>
+                </div>
+                <div class="rightTab">
+                    <input type="number" id="age" name="age" placeholder="Unesite svoje godine" min="1" max="125"
+                        required class="input-field">
+                </div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="userRating">Spol?</label>
+                </div>
+                <div class="rightTab">
+                    <ul style="list-style: none;">
+                        <li class="radio"><a>Musko<input name="radio-button" value="1" type="radio" class="userRatings"></a></li>
+                        <li class="radio"><a>Zensko<input name="radio-button" value="2" type="radio" class="userRatings"></a></li>
+                        <li class="radio"><a>Ne zelite reci?<input name="radio-button" value="3" type="radio" class="userRatings"></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="date">Datum Rodjenja:</label>
+                </div>
+                <div class="rightTab">
+                    <input type="date" id="date" name="date" class="input-field">
+                </div>
+            </div>
+            <div class="rowTab">
+                <div class="labels">
+                    <label for="dropdown">U kojem gradu zivite?</label>
+                </div>
+                <div class="rightTab">
+                    <select id="grad" name="grad-ime" class="dropdown">
+                        <option disabled value>Izaberite Grad</option>
+                        <option value="breza">Breza</option>
+                        <option value="vijesolici">Vijesolici</option>
+                        <option value="trtorici">Trtorici</option>
+                        <option value="sarajevo">Sarajevo</option>
+                        <option value="konjic">Konjic</option>
+                        <option value="visoko">Visoko</option>
+                        <option value="podlugovi">Podlugovi</option>
+                        <option value="ilijas">Ilijas</option>
+                        <option value="ilidza">Ilidza</option>
+
+                    </select>
+
+                </div>
+            </div>
+            <p>Ne zivite nigdje od ponudjenih mjesta?<br>Killyourself then</p>
+            <button type="submit" id="submit">Killmyself</button>
+
+
+        </form>
+
+    </div>
+</body>
+
+</html>

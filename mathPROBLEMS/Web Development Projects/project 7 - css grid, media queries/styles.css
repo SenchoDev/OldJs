@@ -1,0 +1,162 @@
+
+.nav-wrapper{
+    max-width: 1200px; /*gives it width of 1200px*/
+    margin:0 auto; /*centers it, gives it centering trick in browser*/
+    padding: 15px 20px;
+    margin-top:30px;
+    display:grid; /* we are going to use grid to layout everything*/
+    grid-template-columns: 30% /*30% of the begining to the end*/ auto /*stretches it till the end*/;
+    background-color: red;
+}
+.nav-wrapper ul li{
+    display:inline;
+    list-style-type:none;
+}
+
+.main-wrapper{
+    max-width:1200px;
+    margin:auto; /*it centers everything this is main wrapper*/
+}
+.burger-icon{
+    display:none /*makes that burger item go off when on pc website and we have two cols*/
+
+}
+
+.wrapper{
+    max-width:100%;
+    margin:auto;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr); /*makes it 3 columns each one 1fraction*/
+    grid-gap:10px;
+    color:#ffffff;
+    grid-template-areas:
+        "featuredMain featuredMain featuredSub"
+        "contentMain contentMain contentSub";
+}
+
+.featured{
+    grid-area:featuredMain;
+    min-height:500px;
+    background-color:purple;
+
+}
+
+.sub-featured{ /* this one is parent to these subs , and he's going to need grid for them*/
+    grid-area:featuredSub;
+    background-color:blue;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap:10px;
+}
+
+.sub1{
+    background-color: green;
+
+}
+.sub2{
+    background-color: green;
+}
+.sub3{
+    background-color: green;
+
+}
+.main-content{
+    grid-area:contentMain;
+    background-color:orange;
+}
+.main-sidebar{
+    grid-area:contentSub;
+    background-color:yellow;
+}
+
+.footer{
+    display:grid;
+    margin:auto; /*center it*/
+    grid-template-columns: minmax(20px, 300px)
+    minmax(20px, 300px)
+    minmax(20px, 300px)
+    minmax(20px, 300px); /*repeat this for each column(6), we are setting up 4 columns 
+    each one will have minimum of 20px and max of 300px*/
+    justify-content: center; /*used for css grids to center columns*/
+    grid-template-rows: 1fr 1fr; /* 2 rows each row will have one fraction */
+    background-color: #333;
+    color:#fff;
+
+}
+/*tablet*/
+
+@media screen and (max-width:950px){
+    .wrapper{
+        grid-template-areas:"featuredMain featuredMain featuredMain"
+                            "featuredSub featuredSub featuredSub"
+                            "contentMain contentMain contentSub"
+                        
+    }
+    .sub-featured{
+        grid-template-columns:repeat(3, 1fr)
+    }
+    .nav-items{
+        grid-column:1/5;
+        text-align:center; /*text is in the center and it is spanding 5 full columns with previous 70 precents */
+
+    }
+    .logo{
+        grid-column:1/5;
+        text-align: center; /*aligns the logo*/
+    }
+    .nav-wrapper{
+        margin-top:0; 
+    }
+
+   
+}
+/*mobile media query*/
+@media screen and (max-width:690px){
+    .logo{
+        grid-column:1/3;
+    }
+    .nav-items{
+        grid-column:1/5;
+        text-align:center;
+    }
+    .nav-wrapper ul{
+        padding:0;
+        margin:0;
+    }
+    .nav-wrapper ul li{
+        display:block;
+    }
+    .burger-icon{
+        display:inline-block;
+        justify-self: end;
+        grid-column:4/5;
+        border:2px solid #333;
+        color:#333;
+        padding:10px;
+        font-weight:bold;
+        border-radius:3px;
+    }
+
+    .burger-icon:hover{
+        cursor: pointer;
+    }
+    .wrapper{
+        grid-template-areas:
+            "featuredMain featuredMain featuredMain"
+            "contentMain contentMain contentMain"
+            "featuredSub featuredSub featuredSub"
+            "contentSub contentSub contentSub"
+
+    }
+    .sub-featured{
+        grid-template-columns:1fr; /*makes them span 1 fr, and make them go back to their vertical stack*/
+
+    }
+    .footer > div{
+        grid-column:1/-1; /*end of your column, left or right */
+    }
+
+    
+
+
+}

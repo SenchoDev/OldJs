@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+:root{
+    --primarygrey-color: rgb(105,105,105);
+}
+body{
+    font-family: 'Lato', sans-serif;
+    margin:0;
+    background: #fff;
+}
+/*------------------
+documentation
+------------------*/
+.documentation{
+    margin:0;
+    padding: 0;
+    height: 100%;
+}
+.wrap{
+    padding:10px 0px 10px 40px;
+}
+/*------------------
+nav bar
+---------------------*/
+
+
+nav{
+    border-right: 2px solid rgba(128,128,128,0.7);
+    border-bottom: 2px solid rgba(128,128,128,0.7);
+    overflow:hidden;
+    position: fixed;
+
+}
+a {
+    text-decoration: none;
+    color: var(--primarygrey-color);
+}
+.wrap ul{
+    padding: 0;
+    margin:0;
+    width:120%;
+}
+.wrap li{
+    border-bottom: 1px solid rgba(128,128,128,0.7);
+    padding: 12px 0px;
+    padding-left: 40px;
+    right:50%;
+    transform: translateX(-14%);
+
+
+}
+
+nav li{
+    list-style: none;
+}
+.highlight{
+    color: black;
+    font-size: 30px;
+    font-weight: 500;
+
+}
+.wrap li:last-child{
+    border-bottom: none;
+    padding-bottom:73px;
+}
+/*Main doc*/
+p{
+    letter-spacing: 0.3px;
+    line-height: 120%;
+    font-weight: lighter;
+}
+#main-doc{
+    max-width: 1300px;
+    margin-left:400px;
+}
+.main-section{
+    padding: 20px 0px 0px 0px;
+    color: var(--primarygrey-color);
+}
+#main-doc .uppercase{
+    font-weight:lighter;
+    font-size: 30px;
+    color: black;
+    margin: 0px 0px 0px -20px;
+}
+#main-doc ul{
+    line-height: 150%;
+}
+
+/*code*/
+.code{
+    background-color:rgba(211,211,211,.25);
+    border-radius: 7px;
+    margin-left: 20px;
+    padding: 20px;
+    letter-spacing: 0.9px;
+    font-size: 15px;
+    line-height: 25px;
+    margin-right: 60px;
+}
+.vis{
+    visibility: hidden;
+
+}
+
