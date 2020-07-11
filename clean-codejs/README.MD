@@ -496,3 +496,399 @@ function showEmployeeList(employees) {
 ```
 
 **[⬆ back to top](#table-of-contents)**
+
+### Set default objects with Object.assign
+
+**Bad:**
+
+```javascript
+const menuConfig = {
+  title: null,
+  body: "Bar",
+  buttonText: null,
+  cancellable: true
+};
+
+function createMenu(config) {
+  config.title = config.title || "Foo";
+  config.body = config.body || "Bar";
+  config.buttonText = config.buttonText || "Baz";
+  config.cancellable =
+    config.cancellable !== undefined ? config.cancellable : true;
+}
+
+createMenu(menuConfig);
+```
+
+**Good:**
+
+```javascript
+const menuConfig = {
+  title: "Order",
+  // User did not include 'body' key
+  buttonText: "Send",
+  cancellable: true
+};
+
+function createMenu(config) {
+  config = Object.assign(
+    {
+      title: "Foo",
+      body: "Bar",
+      buttonText: "Baz",
+      cancellable: true
+    },
+    config
+  );
+
+  // config now equals: {title: "Order", body: "Bar", buttonText: "Send", cancellable: true}
+  // ...
+}
+
+createMenu(menuConfig);
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Don't use flags as function parameters
+
+Flags tell your user that this function does more than one thing. Functions should do one thing. Split out your functions if they are following different code paths based on a boolean.
+
+**Bad:**
+
+```javascript
+function createFile(name, temp) {
+  if (temp) {
+    fs.create(`./temp/${name}`);
+  } else {
+    fs.create(name);
+  }
+}
+```
+
+**Good:**
+
+```javascript
+function createFile(name) {
+  fs.create(name);
+}
+
+function createTempFile(name) {
+  createFile(`./temp/${name}`);
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Avoid Side Effects (part 1)
+
+A function produces a side effect if it does anything other than take a value in
+and return another value or values. A side effect could be writing to a file,
+modifying some global variable, or accidentally wiring all your money to a
+stranger.
+
+Now, you do need to have side effects in a program on occasion. Like the previous
+example, you might need to write to a file. What you want to do is to
+centralize where you are doing this. Don't have several functions and classes
+that write to a particular file. Have one service that does it. One and only one.
+
+The main point is to avoid common pitfalls like sharing state between objects
+without any structure, using mutable data types that can be written to by anything,
+and not centralizing where your side effects occur. If you can do this, you will
+be happier than the vast majority of other programmers.
+
+**Bad:**
+
+```javascript
+// Global variable referenced by following function.
+// If we had another function that used this name, now it'd be an array and it could break it.
+let name = "Ryan McDermott";
+
+function splitIntoFirstAndLastName() {
+  name = name.split(" ");
+}
+
+splitIntoFirstAndLastName();
+
+console.log(name); // ['Ryan', 'McDermott'];
+```
+
+**Good:**
+
+```javascript
+function splitIntoFirstAndLastName(name) {
+  return name.split(" ");
+}
+
+const name = "Ryan McDermott";
+const newName = splitIntoFirstAndLastName(name);
+
+console.log(name); // 'Ryan McDermott';
+console.log(newName); // ['Ryan', 'McDermott'];
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Avoid Side Effects (part 2)
+
+In JavaScript, primitives are passed by value and objects/arrays are passed by
+reference. In the case of objects and arrays, if your function makes a change
+in a shopping cart array, for example, by adding an item to purchase,
+then any other function that uses that `cart` array will be affected by this
+addition. That may be great, however it can be bad too. Let's imagine a bad
+situation:
+
+The user clicks the "Purchase" button which calls a `purchase` function that
+spawns a network request and sends the `cart` array to the server. Because
+of a bad network connection, the `purchase` function has to keep retrying the
+request. Now, what if in the meantime the user accidentally clicks "Add to Cart"
+button on an item they don't actually want before the network request begins?
+If that happens and the network request begins, then that purchase function
+will send the accidentally added item because it has a reference to a shopping
+cart array that the `addItemToCart` function modified by adding an unwanted
+item.
+
+A great solution would be for the `addItemToCart` to always clone the `cart`,
+edit it, and return the clone. This ensures that no other functions that are
+holding onto a reference of the shopping cart will be affected by any changes.
+
+Two caveats to mention to this approach:
+
+1. There might be cases where you actually want to modify the input object,
+   but when you adopt this programming practice you will find that those cases
+   are pretty rare. Most things can be refactored to have no side effects!
+
+2. Cloning big objects can be very expensive in terms of performance. Luckily,
+   this isn't a big issue in practice because there are
+   [great libraries](https://facebook.github.io/immutable-js/) that allow
+   this kind of programming approach to be fast and not as memory intensive as
+   it would be for you to manually clone objects and arrays.
+
+**Bad:**
+
+```javascript
+const addItemToCart = (cart, item) => {
+  cart.push({ item, date: Date.now() });
+};
+```
+
+**Good:**
+
+```javascript
+const addItemToCart = (cart, item) => {
+  return [...cart, { item, date: Date.now() }];
+};
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Don't write to global functions
+
+Polluting globals is a bad practice in JavaScript because you could clash with another
+library and the user of your API would be none-the-wiser until they get an
+exception in production. Let's think about an example: what if you wanted to
+extend JavaScript's native Array method to have a `diff` method that could
+show the difference between two arrays? You could write your new function
+to the `Array.prototype`, but it could clash with another library that tried
+to do the same thing. What if that other library was just using `diff` to find
+the difference between the first and last elements of an array? This is why it
+would be much better to just use ES2015/ES6 classes and simply extend the `Array` global.
+
+**Bad:**
+
+```javascript
+Array.prototype.diff = function diff(comparisonArray) {
+  const hash = new Set(comparisonArray);
+  return this.filter(elem => !hash.has(elem));
+};
+```
+
+**Good:**
+
+```javascript
+class SuperArray extends Array {
+  diff(comparisonArray) {
+    const hash = new Set(comparisonArray);
+    return this.filter(elem => !hash.has(elem));
+  }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Favor functional programming over imperative programming
+
+JavaScript isn't a functional language in the way that Haskell is, but it has
+a functional flavor to it. Functional languages can be cleaner and easier to test.
+Favor this style of programming when you can.
+
+**Bad:**
+
+```javascript
+const programmerOutput = [
+  {
+    name: "Uncle Bobby",
+    linesOfCode: 500
+  },
+  {
+    name: "Suzie Q",
+    linesOfCode: 1500
+  },
+  {
+    name: "Jimmy Gosling",
+    linesOfCode: 150
+  },
+  {
+    name: "Gracie Hopper",
+    linesOfCode: 1000
+  }
+];
+
+let totalOutput = 0;
+
+for (let i = 0; i < programmerOutput.length; i++) {
+  totalOutput += programmerOutput[i].linesOfCode;
+}
+```
+
+**Good:**
+
+```javascript
+const programmerOutput = [
+  {
+    name: "Uncle Bobby",
+    linesOfCode: 500
+  },
+  {
+    name: "Suzie Q",
+    linesOfCode: 1500
+  },
+  {
+    name: "Jimmy Gosling",
+    linesOfCode: 150
+  },
+  {
+    name: "Gracie Hopper",
+    linesOfCode: 1000
+  }
+];
+
+const totalOutput = programmerOutput.reduce(
+  (totalLines, output) => totalLines + output.linesOfCode,
+  0
+);
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Encapsulate conditionals
+
+**Bad:**
+
+```javascript
+if (fsm.state === "fetching" && isEmpty(listNode)) {
+  // ...
+}
+```
+
+**Good:**
+
+```javascript
+function shouldShowSpinner(fsm, listNode) {
+  return fsm.state === "fetching" && isEmpty(listNode);
+}
+
+if (shouldShowSpinner(fsmInstance, listNodeInstance)) {
+  // ...
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Avoid negative conditionals
+
+**Bad:**
+
+```javascript
+function isDOMNodeNotPresent(node) {
+  // ...
+}
+
+if (!isDOMNodeNotPresent(node)) {
+  // ...
+}
+```
+
+**Good:**
+
+```javascript
+function isDOMNodePresent(node) {
+  // ...
+}
+
+if (isDOMNodePresent(node)) {
+  // ...
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Avoid conditionals
+
+This seems like an impossible task. Upon first hearing this, most people say,
+"how am I supposed to do anything without an `if` statement?" The answer is that
+you can use polymorphism to achieve the same task in many cases. The second
+question is usually, "well that's great but why would I want to do that?" The
+answer is a previous clean code concept we learned: a function should only do
+one thing. When you have classes and functions that have `if` statements, you
+are telling your user that your function does more than one thing. Remember,
+just do one thing.
+
+**Bad:**
+
+```javascript
+class Airplane {
+  // ...
+  getCruisingAltitude() {
+    switch (this.type) {
+      case "777":
+        return this.getMaxAltitude() - this.getPassengerCount();
+      case "Air Force One":
+        return this.getMaxAltitude();
+      case "Cessna":
+        return this.getMaxAltitude() - this.getFuelExpenditure();
+    }
+  }
+}
+```
+
+**Good:**
+
+```javascript
+class Airplane {
+  // ...
+}
+
+class Boeing777 extends Airplane {
+  // ...
+  getCruisingAltitude() {
+    return this.getMaxAltitude() - this.getPassengerCount();
+  }
+}
+
+class AirForceOne extends Airplane {
+  // ...
+  getCruisingAltitude() {
+    return this.getMaxAltitude();
+  }
+}
+
+class Cessna extends Airplane {
+  // ...
+  getCruisingAltitude() {
+    return this.getMaxAltitude() - this.getFuelExpenditure();
+  }
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
