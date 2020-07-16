@@ -381,9 +381,4 @@ $scope.model = {
 const actions = function() {
   // ...
 
-//. --------------------------- Function callers and callees should be close
-
-// dont
-
-// do
-
+}
